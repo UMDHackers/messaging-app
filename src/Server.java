@@ -9,34 +9,57 @@ public class Server {
 	public Server() {
 	}
 	public void listen_messages() {
-		try {
-			ServerSocket serverSocket = new ServerSocket(PORT_NUM);
-	
-			while(true) {
-				try (
-					Socket clientSocket = serverSocket.accept();  
-					PrintWriter out = new PrintWriter(clientSocket.getOutputStream(), true);                   
-			        BufferedReader in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
-		        ) {
-					String inputLine;
-		            while ((inputLine = in.readLine()) != null) {
-		                out.println(inputLine);
-		            }
+		
+		/*
+		try (
+            ServerSocket serverSocket =
+                new ServerSocket(PORT_NUM);
+            Socket clientSocket = serverSocket.accept();     
+            PrintWriter out =
+                new PrintWriter(clientSocket.getOutputStream(), true);                   
+            BufferedReader in = new BufferedReader(
+                new InputStreamReader(clientSocket.getInputStream()));
+        ) {
+            String inputLine;
+            while ((inputLine = in.readLine()) != null) {
+               System.out.println(inputLine);
+            }
+        } catch (IOException e) {
+            System.out.println("Exception caught when trying to listen on port "
+                + PORT_NUM + " or listening for a connection");
+            System.out.println(e.getMessage());
+        }*/
+			
+			try {
+				ServerSocket serverSocket = new ServerSocket(PORT_NUM);
+		
+				while(true) {
+					try (
+						Socket clientSocket = serverSocket.accept();  
+						PrintWriter out = new PrintWriter(clientSocket.getOutputStream(), true);                   
+				        BufferedReader in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
+			        ) {
+						System.out.println("message recived");
+						String inputLine;
+			            while ((inputLine = in.readLine()) != null) {
+			                System.out.println(inputLine);
+			            }
+					}
+					catch(IOException e) {
+						System.out.println("Exception");
+						System.out.println(e.getMessage());
+						serverSocket.close();
+						break;
+					}
 				}
-				catch(IOException e) {
-					System.out.println("Exception");
-					System.out.println(e.getMessage());
-					serverSocket.close();
-					break;
-				}
+				serverSocket.close();
 			}
-			serverSocket.close();
-		}
-		catch(Exception e) {
-			 System.out.println("Exception caught when trying to listen on port " + PORT_NUM + " or listening for a connection");
-		     System.out.println(e.getMessage());
-			 return;
-		}
+			catch(Exception e) {
+				 System.out.println("Exception caught when trying to listen on port " + PORT_NUM + " or listening for a connection");
+			     System.out.println(e.getMessage());
+				 return;
+			}
+      
 	}
 	
 }
