@@ -1,5 +1,6 @@
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.net.InetAddress;
 import java.net.Socket;
 import java.net.UnknownHostException;
 public class Client {
@@ -13,6 +14,7 @@ public class Client {
 			//Output to socket
 			PrintWriter out = new PrintWriter(socket.getOutputStream(), true);
 		) {		
+			System.out.println("Message send");
 			out.println(message);
 		} catch(UnknownHostException e) {
 			System.err.println("Unknown host");
