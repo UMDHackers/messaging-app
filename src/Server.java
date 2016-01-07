@@ -4,6 +4,9 @@ import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.ServerSocket;
 import java.net.Socket; 
+
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 public class Server {
 	private final  int PORT_NUM= 3030;
 	public Server() {
@@ -39,11 +42,16 @@ public class Server {
 						PrintWriter out = new PrintWriter(clientSocket.getOutputStream(), true);                   
 				        BufferedReader in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
 			        ) {
-						System.out.println("message recived");
+						//System.out.println("message recived");
 						String inputLine;
 			            while ((inputLine = in.readLine()) != null) {
-			                System.out.println(inputLine);
+			            	JFrame parent = new JFrame();
+			                parent.pack();
+			                parent.setVisible(true);
+			                JOptionPane.showMessageDialog(parent, clientSocket.getInetAddress() + " says "+ inputLine);
+			            //	System.out.println("Hello>");
 			            }
+			           // System.out.println("done");
 					}
 					catch(IOException e) {
 						System.out.println("Exception");
