@@ -16,7 +16,7 @@ public class KongoMessenger extends Thread{
 		Hashtable<String, String> namesToIps = new Hashtable <String, String>();
 		@SuppressWarnings("resource")
 		Scanner scan = new Scanner(System.in);
-		namesToIps.put("parth", "192.168.0.114");
+		
 		String[] userArray ;
 		do {
 			System.out.print("kongo>");
