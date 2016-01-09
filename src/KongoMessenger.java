@@ -17,7 +17,6 @@ public class KongoMessenger extends Thread{
 		serverThread.start();
 		String userInput;
 	
-		namesToIps.put("Parth", "192.168.1.199");
 		@SuppressWarnings("resource")
 		Scanner scan = new Scanner(System.in);
 		
